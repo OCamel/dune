@@ -55,6 +55,14 @@
    (progn (run %{exe:cram.exe} -test run.t) (diff? run.t run.t.corrected)))))
 
 (rule
+ (alias byte_complete)
+ (deps (package dune) (source_tree test-cases/byte_complete))
+ (action
+  (chdir
+   test-cases/byte_complete
+   (progn (run %{exe:cram.exe} -test run.t) (diff? run.t run.t.corrected)))))
+
+(rule
  (alias c-stubs)
  (deps (package dune) (source_tree test-cases/c-stubs))
  (action
@@ -124,6 +132,14 @@
  (action
   (chdir
    test-cases/corrections
+   (progn (run %{exe:cram.exe} -test run.t) (diff? run.t run.t.corrected)))))
+
+(rule
+ (alias cram)
+ (deps (package dune) (source_tree test-cases/cram))
+ (action
+  (chdir
+   test-cases/cram
    (progn (run %{exe:cram.exe} -test run.t) (diff? run.t run.t.corrected)))))
 
 (rule
@@ -2043,11 +2059,29 @@
    (progn (run %{exe:cram.exe} -test run.t) (diff? run.t run.t.corrected)))))
 
 (rule
+ (alias with-nested-exit-codes)
+ (deps (package dune) (source_tree test-cases/with-nested-exit-codes))
+ (action
+  (chdir
+   test-cases/with-nested-exit-codes
+   (progn (run %{exe:cram.exe} -test run.t) (diff? run.t run.t.corrected)))))
+
+(rule
  (alias with-stdin-from)
  (deps (package dune) (source_tree test-cases/with-stdin-from))
  (action
   (chdir
    test-cases/with-stdin-from
+   (progn (run %{exe:cram.exe} -test run.t) (diff? run.t run.t.corrected)))))
+
+(rule
+ (alias with-unsupported-nested-exit-codes)
+ (deps
+  (package dune)
+  (source_tree test-cases/with-unsupported-nested-exit-codes))
+ (action
+  (chdir
+   test-cases/with-unsupported-nested-exit-codes
    (progn (run %{exe:cram.exe} -test run.t) (diff? run.t run.t.corrected)))))
 
 (rule
@@ -2094,6 +2128,7 @@
   (alias bad-alias-error)
   (alias block-strings)
   (alias byte-code-only)
+  (alias byte_complete)
   (alias c-stubs)
   (alias check-alias)
   (alias cmdliner-dep-conf)
@@ -2101,6 +2136,7 @@
   (alias copy-files-non-sub-dir-error)
   (alias copy_files)
   (alias corrections)
+  (alias cram)
   (alias cross-compilation)
   (alias custom-build-dir)
   (alias custom-cross-compilation)
@@ -2328,7 +2364,9 @@
   (alias virtual-libraries-vlib-wrong-default-impl)
   (alias windows-diff)
   (alias with-exit-codes)
+  (alias with-nested-exit-codes)
   (alias with-stdin-from)
+  (alias with-unsupported-nested-exit-codes)
   (alias workspace-paths)
   (alias workspaces)
   (alias wrapped-false-main-module-name)
@@ -2344,6 +2382,7 @@
   (alias bad-alias-error)
   (alias block-strings)
   (alias byte-code-only)
+  (alias byte_complete)
   (alias c-stubs)
   (alias check-alias)
   (alias cmdliner-dep-conf)
@@ -2351,6 +2390,7 @@
   (alias copy-files-non-sub-dir-error)
   (alias copy_files)
   (alias corrections)
+  (alias cram)
   (alias custom-build-dir)
   (alias custom-cross-compilation)
   (alias cxx-extension)
@@ -2548,7 +2588,9 @@
   (alias virtual-libraries-vlib-wrong-default-impl)
   (alias windows-diff)
   (alias with-exit-codes)
+  (alias with-nested-exit-codes)
   (alias with-stdin-from)
+  (alias with-unsupported-nested-exit-codes)
   (alias workspace-paths)
   (alias workspaces)
   (alias wrapped-false-main-module-name)
