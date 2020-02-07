@@ -45,17 +45,21 @@ end
 
 module Root_package : sig
   type t =
-  | Dune of Dune_package.t
-  | Findlib of Meta_source.t
+    | Dune of Dune_package.t
+    | Findlib of Meta_source.t
 
-  type unavailable_reason =
-  | Not_found
-  | Invalid_dune_package of exn
+  module Unavailable_reason : sig
+    type t =
+      | Not_found
+      | Invalid_dune_package of exn
+  end
 end
 
 (** Lookup a package in the given database *)
-val find_root_package:
-  t -> root_name:Lib_name.t -> (Root_package.t, Root_package.unavailable_reason) result
+val find_root_package :
+     t
+  -> root_name:Lib_name.t
+  -> (Root_package.t, Root_package.Unavailable_reason.t) result
 
 val find :
   t -> Lib_name.t -> (Dune_package.Entry.t, Unavailable_reason.t) result
